@@ -1,0 +1,21 @@
+body {
+    background-color: purple;
+} 
+
+h2 {
+    color: white;
+}
+
+#Google {
+    color: greenyellow;
+}
+
+.q {
+    color: aqua;
+}
+
+@media (min-width: 30em) {
+    body {
+      background-color: gray;
+    }
+  }

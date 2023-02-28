@@ -1,0 +1,55 @@
+<!doctype html>
+
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+	<script>
+		
+	const searchActions = { //create an object to store all search engine values & URLs as key/value pairs
+		'Google': 'https://www.google.com/search',
+		'duckDuckGo': 'https://duckduckgo.com/',
+		'Brave': 'https://search.brave.com/search',
+		'Bing!': 'https://www.bing.com/search',
+	}
+
+window.addEventListener("load", function() {
+
+	const submitButton = document.querySelector("input[type='submit']");
+	submitButton.addEventListener('click', setSearchEngine)
+
+});
+ 
+function setSearchEngine(event) {
+    
+    let searchTextBox = document.querySelector("input[name='q']");
+    let searchEngineSelected = document.querySelector('input[name=engine]:checked'); //?? 
+	let searchForm = document.getElementById('searchForm');
+	let urlSelected = searchActions[searchEngineSelected.value]; //use bracket notation to get the value out of the object
+	searchForm.setAttribute('action', urlSelected);
+	
+    if (searchTextBox.value === "") {
+			alert("Can't play fetch if you don't enter a search term!");
+			event.preventDefault();
+		} else if (submitButton === null) {
+			alert('Please select a search engine before clicking "Go Get It!"');
+			event.preventDefault();
+		}	
+}
+   
+	</script>
+</head>
+  <h2>Get Your Search On!</h2>
+<body>
+	 <!-- target allows to open in a new tab -->
+	<form action="" id="searchForm" target="_blank">
+    <!-- TODO: add form elements -->
+	  <input type="text" class="q" name="q" /><br />
+      <lable><input type="radio" name="engine" id="Google" value="Google" /> Google </lable>
+	  <lable><input type="radio" name="engine" id="duckDuckGo" value="duckDuckGo" /> DuckDuckGo </lable>
+	  <lable><input type="radio" name="engine" id="Brave" value="Brave" /> Brave </lable>
+	  <lable><input type="radio" name="engine" id="Bing" value="Bing" /> Bing! </lable>
+	  <!-- <button id="submit" value="Go">Get It!</button> -->
+	  <input type="submit" value="Go Get It!" /><br />
+	</form>
+
+</body>

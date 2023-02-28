@@ -2,18 +2,78 @@
 
 <head>
 	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="styles.css" />
 	<script>
-		// TODO: create a handler
-    window.addEventListener("load", function(){
-        // TODO: register the handler
-    });
+		
+		const searchActions = { //create an object to store all search engine values & URLs as key/value pairs
+			'Google': 'https://www.google.com/search',
+			'duckDuckGo': 'https://duckduckgo.com/',
+			'Brave': 'https://search.brave.com/search',
+			'Bing!': 'https://www.bing.com/search',
+		}
+
+window.addEventListener("load", function() {
+   // TODO: create a handler    
+   // TODO: register the handler
+		// const button = document.querySelector("button[id='submit']"); //form-->button //getElementById
+		// button.addEventListener('submit', function() {
+
+		const submitButton = document.querySelector("input[type='submit']");
+		//console.log(submitButton); //checking/testing
+		submitButton.addEventListener('click', setSearchEngine)
+	
+});
+
+ 
+function setSearchEngine(event) {
+		//console.log("this is the setSearchEngine test message"); 
+		let searchTextBox = document.querySelector("input[name='q']");
+		let searchEngineSelected = document.querySelector('input[name=engine]:checked');
+		//console.log(searchEngineSelected);
+		//event.preventDefault();
+		let searchForm = document.getElementById('searchForm');
+		let urlSelected = searchActions[searchEngineSelected.value]; //use bracket notation to get the value out of the object
+		// console.log(urlSelected);
+		// event.preventDefault();
+		searchForm.setAttribute('action', urlSelected); //see * below 
+   
+   //add validation to the submit handler to make sure the user has selected a search engine and entered a (non-empty) search term
+		if (searchTextBox.value === "") {
+			alert("Can't play fetch if you don't enter a search term!");
+			event.preventDefault();
+		} else if (submitButton === null) {
+			alert('Please select a search engine before clicking "Go Get It!"');
+			event.preventDefault();
+		}
+		
+		
+}
+		//const form = document.querySelector('form');
+		//const searchEngineSelected = document.querySelector('input[name=engine]: checked'); 
+		// let url = searchActions[searchEngineSelected.value]; //actions or action?
+		// form.action = url;
+
+		//element.setAttribute(attr_name, attr_value) 
+		//--> Attr_Name: The name of the attribute we want to add to the element, i.e., class.
+        //--> Attr_Value: The value for the specified attribute
+		//The setAttribute() method sets the attribute and its value (passed as a parameter) to the element it is applied on.
+   
 	</script>
 </head>
-
+  <h2>Get Your Search On!</h2>
 <body>
-
-	<form id="searchForm">
-    <!-- TODO: add form elements -->
+	 
+	<form id="searchForm" action="" target="_blank"> 
+		<!-- * want to insert an attribute, key/value pair, into the empty value for action -- action="urlSelected" -->
+		<!-- * target="_blank" allows the search, url, selected to open in a new browser tab -->
+	  <!-- TODO: add form elements -->
+	  <input type="text" class="q" name="q" /><br />
+      <lable><input type="radio" name="engine" id="Google" value="Google" /> Google </lable>
+	  <lable><input type="radio" name="engine" id="duckDuckGo" value="duckDuckGo" /> DuckDuckGo </lable>
+	  <lable><input type="radio" name="engine" id="Brave" value="Brave" /> Brave </lable>
+	  <lable><input type="radio" name="engine" id="Bing" value="Bing" /> Bing! </lable>
+	  <!-- <button id="submit" value="Go">Get It!</button> -->
+	  <input type="submit" value="Go Get It!" /><br />
 	</form>
 
 </body>
